@@ -1,4 +1,5 @@
 import { Heart, Users, TrendingUp, Shield } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../components/ui/Button';
 import {
   Card,
@@ -8,34 +9,32 @@ import {
 } from '../components/ui/Card';
 import { StressAssessment } from '../components/features/StressAssessment';
 
-const features = [
-  {
-    icon: Heart,
-    title: 'Stress Assessment',
-    description:
-      'Identify stress levels and their impact on your relationship with our comprehensive assessment tool.',
-  },
-  {
-    icon: Users,
-    title: 'Couple Check-ins',
-    description:
-      'Daily mood and relationship quality tracking to monitor progress together.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Progress Tracking',
-    description:
-      'Visualize your relationship health improvements over time with detailed analytics.',
-  },
-  {
-    icon: Shield,
-    title: 'Local Support',
-    description:
-      'Access to Kazakhstan-based therapists and support groups in your preferred language.',
-  },
-];
-
 export const HomePage = () => {
+  const { t } = useTranslation();
+
+  const features = [
+    {
+      icon: Heart,
+      title: t('homepage.features.assessment.title'),
+      description: t('homepage.features.assessment.description'),
+    },
+    {
+      icon: Users,
+      title: t('homepage.features.daily_tools.title'),
+      description: t('homepage.features.daily_tools.description'),
+    },
+    {
+      icon: TrendingUp,
+      title: t('homepage.features.progress.title'),
+      description: t('homepage.features.progress.description'),
+    },
+    {
+      icon: Shield,
+      title: t('homepage.features.local_support.title'),
+      description: t('homepage.features.local_support.description'),
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -46,29 +45,16 @@ export const HomePage = () => {
             <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-8 shadow-sm">
               <Heart className="h-5 w-5 text-rose-500" />
               <span className="text-sm font-medium text-gray-700">
-                Trusted by 1000+ couples in Kazakhstan
+                Trusted by 1000+ people in Kazakhstan
               </span>
             </div>
 
             <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight">
-              Build Stronger
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-purple-600">
-                Relationships
-              </span>
-              <span className="text-4xl md:text-5xl text-gray-700">
-                Stress-Free
-              </span>
+              {t('homepage.hero.title')}
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed max-w-3xl mx-auto">
-              Help couples in Kazakhstan manage stress before it damages their
-              relationships. Get personalized tools, local support, and expert
-              guidance in
-              <span className="font-semibold text-gray-800">
-                {' '}
-                Kazakh and Russian
-              </span>
-              .
+              {t('homepage.hero.description')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -76,14 +62,14 @@ export const HomePage = () => {
                 size="lg"
                 className="text-lg px-10 py-4 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
               >
-                Start Free Assessment
+                {t('homepage.hero.cta')}
               </Button>
               <Button
                 variant="outline"
                 size="lg"
                 className="text-lg px-10 py-4 border-2 border-gray-300 hover:border-rose-300 hover:bg-rose-50 transition-all duration-200"
               >
-                Learn More
+                {t('homepage.hero.secondary_cta')}
               </Button>
             </div>
 
@@ -110,15 +96,11 @@ export const HomePage = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Everything You Need for a
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-purple-600">
-                {' '}
-                Healthy Relationship
-              </span>
+              {t('homepage.features.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Our platform provides comprehensive tools to identify, understand,
-              and manage relationship stress before it becomes a problem.
+              and manage stress before it becomes a problem.
             </p>
           </div>
 
@@ -162,16 +144,12 @@ export const HomePage = () => {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Start Your Relationship
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-purple-600">
-                {' '}
-                Health Journey
-              </span>
+              Start Your Mental Health Journey
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Take our comprehensive assessment to understand how stress is
-              affecting your relationship and get personalized recommendations
-              tailored for couples in Kazakhstan.
+              Take our comprehensive assessment to understand your stress levels
+              and get personalized recommendations tailored for life in
+              Kazakhstan.
             </p>
           </div>
 
@@ -189,11 +167,11 @@ export const HomePage = () => {
         <div className="relative container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Ready to Strengthen Your Relationship?
+              Ready to Take Control of Your Stress?
             </h2>
             <p className="text-xl md:text-2xl mb-12 opacity-95 leading-relaxed">
-              Join thousands of couples in Kazakhstan who are building stronger,
-              stress-free relationships with our proven approach.
+              Join thousands of people in Kazakhstan who are building better
+              mental health with our proven approach.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -215,7 +193,7 @@ export const HomePage = () => {
             <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
                 <div className="text-3xl font-bold mb-2">1000+</div>
-                <div className="text-white/80">Couples Helped</div>
+                <div className="text-white/80">People Helped</div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
                 <div className="text-3xl font-bold mb-2">95%</div>

@@ -1,0 +1,190 @@
+{
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "assessment": "Assessment",
+    "exercises": "Exercises",
+    "progress": "Progress",
+    "resources": "Resources",
+    "profile": "Profile",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Finish",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "optional": "Optional",
+    "required": "Required",
+    "select": "Select",
+    "language": "Language"
+  },
+  "languages": {
+    "en": "English",
+    "ru": "Русский",
+    "kk": "Қазақша"
+  },
+  "homepage": {
+    "hero": {
+      "title": "Take Control of Your Stress",
+      "subtitle": "A personalized stress management platform designed for life in Kazakhstan",
+      "description": "Quick daily tools, cultural understanding, and professional support to help you build mental resilience.",
+      "cta": "Start Free Assessment",
+      "secondary_cta": "Learn More"
+    },
+    "features": {
+      "title": "Built for Your Life",
+      "assessment": {
+        "title": "Smart Assessment",
+        "description": "Understand your stress with questions that consider Kazakhstan's unique challenges"
+      },
+      "daily_tools": {
+        "title": "5-Minute Daily Tools",
+        "description": "Quick exercises that fit into your busy schedule"
+      },
+      "progress": {
+        "title": "Track Progress",
+        "description": "See your mental wellness journey with clear, motivating insights"
+      },
+      "local_support": {
+        "title": "Local Resources",
+        "description": "Connect with Kazakhstan-based mental health professionals"
+      }
+    }
+  },
+  "assessment": {
+    "title": "Stress Assessment",
+    "subtitle": "Help us understand your current situation",
+    "progress": "Step {{current}} of {{total}}",
+    "questions": {
+      "stress_level": "How would you rate your current stress level?",
+      "stress_factors": "What are your main sources of stress?",
+      "work_pressure": "Work pressure",
+      "financial_concerns": "Financial concerns",
+      "family_responsibilities": "Family responsibilities",
+      "health_issues": "Health issues",
+      "social_relationships": "Social relationships",
+      "economic_uncertainty": "Economic uncertainty",
+      "urban_living": "Urban living challenges",
+      "rural_isolation": "Rural isolation",
+      "language_barriers": "Language barriers",
+      "cultural_adaptation": "Cultural adaptation"
+    },
+    "results": {
+      "title": "Your Assessment Results",
+      "stress_level": "Current Stress Level: {{level}}/10",
+      "recommendations": "Personalized Recommendations",
+      "next_steps": "Recommended Next Steps"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome back, {{name}}",
+    "today_checkin": "Today's Check-in",
+    "completed": "Completed",
+    "pending": "Pending",
+    "streak": "{{count}} day streak",
+    "quick_actions": "Quick Actions",
+    "recent_progress": "Recent Progress",
+    "recommendations": "For You Today"
+  },
+  "checkin": {
+    "title": "Daily Check-in",
+    "subtitle": "How are you feeling today?",
+    "mood": "Mood Level",
+    "stress": "Stress Level",
+    "sleep": "Sleep Quality",
+    "energy": "Energy Level",
+    "notes": "Notes (optional)",
+    "triggers": "Any stress triggers today?",
+    "submit": "Complete Check-in"
+  },
+  "exercises": {
+    "title": "Stress Relief Exercises",
+    "categories": {
+      "breathing": "Breathing",
+      "meditation": "Meditation",
+      "mindfulness": "Mindfulness",
+      "movement": "Movement"
+    },
+    "duration": "Duration: {{minutes}} min",
+    "difficulty": "Difficulty: {{level}}",
+    "start_exercise": "Start Exercise",
+    "exercise_complete": "Exercise Complete!",
+    "rate_effectiveness": "How effective was this exercise?"
+  },
+  "progress": {
+    "title": "Your Progress",
+    "overview": "Overview",
+    "trends": "Trends",
+    "achievements": "Achievements",
+    "export": "Export Data",
+    "stress_trends": "Stress Level Trends",
+    "mood_patterns": "Mood Patterns",
+    "exercise_completion": "Exercise Completion"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "email": "Email",
+      "password": "Password",
+      "remember_me": "Remember me",
+      "forgot_password": "Forgot password?",
+      "no_account": "Don't have an account?",
+      "sign_up": "Sign up"
+    },
+    "register": {
+      "title": "Create Your Account",
+      "first_name": "First Name",
+      "last_name": "Last Name (optional)",
+      "email": "Email",
+      "phone": "Phone (optional)",
+      "password": "Password",
+      "confirm_password": "Confirm Password",
+      "location": "Location in Kazakhstan",
+      "terms": "I agree to the Terms of Service and Privacy Policy",
+      "have_account": "Already have an account?",
+      "sign_in": "Sign in"
+    }
+  },
+  "profile": {
+    "title": "Profile Settings",
+    "personal_info": "Personal Information",
+    "preferences": "Preferences",
+    "privacy": "Privacy Settings",
+    "notifications": "Notifications",
+    "language_preference": "Language Preference",
+    "notification_settings": "Notification Settings",
+    "data_export": "Export My Data",
+    "delete_account": "Delete Account"
+  },
+  "resources": {
+    "title": "Local Resources",
+    "therapists": "Find a Therapist",
+    "support_groups": "Support Groups",
+    "crisis_help": "Crisis Help",
+    "educational": "Educational Resources",
+    "search_location": "Search by location",
+    "filter_by": "Filter by",
+    "specialization": "Specialization",
+    "language_spoken": "Language Spoken"
+  },
+  "footer": {
+    "about": "About",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact",
+    "support": "Support",
+    "crisis_line": "Crisis Line: 150",
+    "copyright": "© 2024 Stress Management Platform. All rights reserved."
+  }
+}

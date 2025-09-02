@@ -1,30 +1,97 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Button } from '../ui/Button';
+import type {
+  AssessmentResults,
+  StressCategory,
+  KazakhstanSpecificStressor,
+  Language,
+} from '../../types';
+import { STRESS_CATEGORIES } from '../../utils/constants';
 
-const stressFactors = [
-  'Work pressure',
-  'Financial concerns',
-  'Family responsibilities',
-  'Health issues',
-  'Social isolation',
-  'Communication problems',
-  'Time management',
-  'Future uncertainty',
+// Kazakhstan-specific stress factors based on our type definitions
+const kazakhstanStressFactors: StressCategory[] = [
+  'work-pressure',
+  'financial-concerns',
+  'family-relationships',
+  'health-issues',
+  'social-isolation',
+  'academic-pressure',
+  'urban-living',
+  'rural-challenges',
+  'cultural-adaptation',
+  'language-barriers',
+  'economic-uncertainty',
+  'political-concerns',
 ];
 
-export const StressAssessment = () => {
+const kazakhstanSpecificStressors: KazakhstanSpecificStressor[] = [
+  'economic-transition',
+  'urbanization-pressure',
+  'traditional-modern-balance',
+  'language-policy-changes',
+  'employment-uncertainty',
+  'housing-costs',
+  'healthcare-access',
+  'education-system',
+];
+
+interface StressAssessmentProps {
+  onComplete?: (assessment: AssessmentResults) => void;
+  language?: Language;
+}
+
+export const StressAssessment = ({
+  onComplete,
+  language = 'en',
+}: StressAssessmentProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [stressLevel, setStressLevel] = useState(5);
-  const [selectedFactors, setSelectedFactors] = useState<string[]>([]);
-  const [relationshipImpact, setRelationshipImpact] = useState(5);
+  const [selectedFactors, setSelectedFactors] = useState<StressCategory[]>([]);
+  const [selectedKzStressors, setSelectedKzStressors] = useState<
+    KazakhstanSpecificStressor[]
+  >([]);
 
-  const handleFactorToggle = (factor: string) => {
+  const handleFactorToggle = (factor: StressCategory) => {
     setSelectedFactors((prev) =>
       prev.includes(factor)
         ? prev.filter((f) => f !== factor)
         : [...prev, factor]
     );
+  };
+
+  const handleKzStressorToggle = (stressor: KazakhstanSpecificStressor) => {
+    setSelectedKzStressors((prev) =>
+      prev.includes(stressor)
+        ? prev.filter((s) => s !== stressor)
+        : [...prev, stressor]
+    );
+  };
+
+  const completeAssessment = () => {
+    const results: AssessmentResults = {
+      stressLevel,
+      stressFactors: selectedFactors,
+      culturalFactors: selectedKzStressors,
+      recommendedActions: [], // Would be populated by backend logic
+      riskLevel:
+        stressLevel <= 3
+          ? 'low'
+          : stressLevel <= 6
+            ? 'moderate'
+            : stressLevel <= 8
+              ? 'high'
+              : 'severe',
+      insights: [
+        `Your stress level is ${getStressLevelText(stressLevel).toLowerCase()}`,
+        `You identified ${selectedFactors.length} main stress factors`,
+        selectedKzStressors.length > 0
+          ? `You're experiencing ${selectedKzStressors.length} Kazakhstan-specific stressors`
+          : '',
+      ].filter(Boolean),
+    };
+
+    onComplete?.(results);
   };
 
   const getStressLevelColor = (level: number) => {
@@ -112,7 +179,7 @@ export const StressAssessment = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {stressFactors.map((factor) => (
+              {kazakhstanStressFactors.map((factor) => (
                 <button
                   key={factor}
                   onClick={() => handleFactorToggle(factor)}
@@ -123,7 +190,9 @@ export const StressAssessment = () => {
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-medium">{factor}</span>
+                    <span className="font-medium">
+                      {STRESS_CATEGORIES[factor][language]}
+                    </span>
                     <div
                       className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
                         selectedFactors.includes(factor)
@@ -155,31 +224,63 @@ export const StressAssessment = () => {
 
       case 2:
         return (
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-medium mb-4">
-                How much is stress affecting your relationship?
+          <div className="space-y-8">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                Kazakhstan-specific stressors
               </h3>
-              <div className="space-y-4">
-                <input
-                  type="range"
-                  min="1"
-                  max="10"
-                  value={relationshipImpact}
-                  onChange={(e) =>
-                    setRelationshipImpact(Number(e.target.value))
-                  }
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between text-sm text-gray-500">
-                  <span>No Impact (1)</span>
-                  <span className="font-medium">
-                    Current: {relationshipImpact}
+              <p className="text-gray-600">
+                Are you experiencing any of these challenges specific to life in
+                Kazakhstan?
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {kazakhstanSpecificStressors.map((stressor) => (
+                <button
+                  key={stressor}
+                  onClick={() => handleKzStressorToggle(stressor)}
+                  className={`group relative p-4 text-left rounded-xl border-2 transition-all duration-200 ${
+                    selectedKzStressors.includes(stressor)
+                      ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 text-blue-700 shadow-lg transform scale-105'
+                      : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50 hover:shadow-md'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium text-sm">
+                      {stressor
+                        .split('-')
+                        .map(
+                          (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                        )
+                        .join(' ')}
+                    </span>
+                    <div
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                        selectedKzStressors.includes(stressor)
+                          ? 'border-blue-500 bg-blue-500'
+                          : 'border-gray-300 group-hover:border-blue-400'
+                      }`}
+                    >
+                      {selectedKzStressors.includes(stressor) && (
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      )}
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {selectedKzStressors.length > 0 && (
+              <div className="text-center">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-medium">
+                  <span>
+                    {selectedKzStressors.length} Kazakhstan-specific stressor
+                    {selectedKzStressors.length !== 1 ? 's' : ''} selected
                   </span>
-                  <span>Major Impact (10)</span>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         );
 
@@ -190,7 +291,7 @@ export const StressAssessment = () => {
               Assessment Complete!
             </h3>
             <p className="text-gray-600">
-              Based on your responses, we'll provide personalized
+              Based on your responses, we&apos;ll provide personalized
               recommendations.
             </p>
           </div>
@@ -201,7 +302,7 @@ export const StressAssessment = () => {
   return (
     <Card className="max-w-2xl mx-auto">
       <CardHeader>
-        <CardTitle>Relationship Stress Assessment</CardTitle>
+        <CardTitle>Personal Stress Assessment for Kazakhstan</CardTitle>
         <div className="flex space-x-2">
           {[0, 1, 2].map((step) => (
             <div
@@ -224,10 +325,16 @@ export const StressAssessment = () => {
             Previous
           </Button>
           <Button
-            onClick={() => setCurrentStep(Math.min(3, currentStep + 1))}
+            onClick={() => {
+              if (currentStep === 2) {
+                completeAssessment();
+              } else {
+                setCurrentStep(Math.min(3, currentStep + 1));
+              }
+            }}
             disabled={currentStep === 3}
           >
-            {currentStep === 2 ? 'Complete' : 'Next'}
+            {currentStep === 2 ? 'Complete Assessment' : 'Next'}
           </Button>
         </div>
       </CardContent>
