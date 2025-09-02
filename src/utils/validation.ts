@@ -217,6 +217,236 @@ export const registrationValidation: FieldValidation<{
 };
 
 // ============================================================================
+// AUTHENTICATION VALIDATION FUNCTIONS
+// ============================================================================
+
+/**
+ * Validates login credentials
+ */
+export function validateLoginCredentials(
+  email: string,
+  password: string
+): ValidationResult {
+  const errors: ValidationError[] = [];
+
+  if (!email) {
+    errors.push({
+      field: 'email',
+      message: 'Email is required',
+      code: 'REQUIRED',
+    });
+  } else if (!isValidEmail(email)) {
+    errors.push({
+      field: 'email',
+      message: 'Please enter a valid email address',
+      code: 'INVALID_FORMAT',
+    });
+  }
+
+  if (!password) {
+    errors.push({
+      field: 'password',
+      message: 'Password is required',
+      code: 'REQUIRED',
+    });
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors,
+  };
+}
+
+/**
+ * Validates registration data
+ */
+export function validateRegistrationData(data: {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName?: string;
+  phone?: string;
+  location: string;
+  agreeToTerms: boolean;
+}): ValidationResult {
+  const errors: ValidationError[] = [];
+
+  // Email validation
+  if (!data.email) {
+    errors.push({
+      field: 'email',
+      message: 'Email is required',
+      code: 'REQUIRED',
+    });
+  } else if (!isValidEmail(data.email)) {
+    errors.push({
+      field: 'email',
+      message: 'Please enter a valid email address',
+      code: 'INVALID_FORMAT',
+    });
+  }
+
+  // Password validation
+  if (!data.password) {
+    errors.push({
+      field: 'password',
+      message: 'Password is required',
+      code: 'REQUIRED',
+    });
+  } else if (data.password.length < VALIDATION_RULES.PASSWORD_MIN_LENGTH) {
+    errors.push({
+      field: 'password',
+      message: `Password must be at least ${VALIDATION_RULES.PASSWORD_MIN_LENGTH} characters`,
+      code: 'MIN_LENGTH',
+    });
+  }
+
+  // Confirm password validation
+  if (!data.confirmPassword) {
+    errors.push({
+      field: 'confirmPassword',
+      message: 'Please confirm your password',
+      code: 'REQUIRED',
+    });
+  } else if (data.password !== data.confirmPassword) {
+    errors.push({
+      field: 'confirmPassword',
+      message: 'Passwords do not match',
+      code: 'PASSWORD_MISMATCH',
+    });
+  }
+
+  // First name validation
+  if (!data.firstName) {
+    errors.push({
+      field: 'firstName',
+      message: 'First name is required',
+      code: 'REQUIRED',
+    });
+  } else if (data.firstName.length < VALIDATION_RULES.NAME_MIN_LENGTH) {
+    errors.push({
+      field: 'firstName',
+      message: `First name must be at least ${VALIDATION_RULES.NAME_MIN_LENGTH} characters`,
+      code: 'MIN_LENGTH',
+    });
+  }
+
+  // Last name validation (optional)
+  if (
+    data.lastName &&
+    data.lastName.length < VALIDATION_RULES.NAME_MIN_LENGTH
+  ) {
+    errors.push({
+      field: 'lastName',
+      message: `Last name must be at least ${VALIDATION_RULES.NAME_MIN_LENGTH} characters`,
+      code: 'MIN_LENGTH',
+    });
+  }
+
+  // Phone validation (optional)
+  if (data.phone && !isValidPhone(data.phone)) {
+    errors.push({
+      field: 'phone',
+      message: 'Please enter a valid phone number',
+      code: 'INVALID_FORMAT',
+    });
+  }
+
+  // Location validation
+  if (!data.location) {
+    errors.push({
+      field: 'location',
+      message: 'Please select your location',
+      code: 'REQUIRED',
+    });
+  }
+
+  // Terms agreement validation
+  if (!data.agreeToTerms) {
+    errors.push({
+      field: 'agreeToTerms',
+      message: 'You must agree to the terms and privacy policy',
+      code: 'REQUIRED',
+    });
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors,
+  };
+}
+
+/**
+ * Validates password reset request
+ */
+export function validatePasswordResetRequest(email: string): ValidationResult {
+  const errors: ValidationError[] = [];
+
+  if (!email) {
+    errors.push({
+      field: 'email',
+      message: 'Email is required',
+      code: 'REQUIRED',
+    });
+  } else if (!isValidEmail(email)) {
+    errors.push({
+      field: 'email',
+      message: 'Please enter a valid email address',
+      code: 'INVALID_FORMAT',
+    });
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors,
+  };
+}
+
+/**
+ * Validates password reset confirmation
+ */
+export function validatePasswordReset(
+  password: string,
+  confirmPassword: string
+): ValidationResult {
+  const errors: ValidationError[] = [];
+
+  if (!password) {
+    errors.push({
+      field: 'password',
+      message: 'Password is required',
+      code: 'REQUIRED',
+    });
+  } else if (password.length < VALIDATION_RULES.PASSWORD_MIN_LENGTH) {
+    errors.push({
+      field: 'password',
+      message: `Password must be at least ${VALIDATION_RULES.PASSWORD_MIN_LENGTH} characters`,
+      code: 'MIN_LENGTH',
+    });
+  }
+
+  if (!confirmPassword) {
+    errors.push({
+      field: 'confirmPassword',
+      message: 'Please confirm your password',
+      code: 'REQUIRED',
+    });
+  } else if (password !== confirmPassword) {
+    errors.push({
+      field: 'confirmPassword',
+      message: 'Passwords do not match',
+      code: 'PASSWORD_MISMATCH',
+    });
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors,
+  };
+}
+
+// ============================================================================
 // UTILITY FUNCTIONS
 // ============================================================================
 

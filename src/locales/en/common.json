@@ -27,7 +27,8 @@
     "optional": "Optional",
     "required": "Required",
     "select": "Select",
-    "language": "Language"
+    "language": "Language",
+    "minutes": "min"
   },
   "languages": {
     "en": "English",
@@ -39,11 +40,17 @@
       "title": "Take Control of Your Stress",
       "subtitle": "A personalized stress management platform designed for life in Kazakhstan",
       "description": "Quick daily tools, cultural understanding, and professional support to help you build mental resilience.",
+      "cultural_subtitle": "Respecting Kazakhstani values while promoting mental wellness for all communities",
+      "trust_indicator": "Trusted by 2,500+ people across Kazakhstan",
       "cta": "Start Free Assessment",
-      "secondary_cta": "Learn More"
+      "secondary_cta": "Learn More",
+      "benefit_1": "100% Free Assessment",
+      "benefit_2": "Local Kazakhstan Support",
+      "benefit_3": "5-Minute Daily Tools"
     },
     "features": {
-      "title": "Built for Your Life",
+      "title": "Built for Your Life in Kazakhstan",
+      "subtitle": "Our platform provides comprehensive tools to identify, understand, and manage stress before it becomes a problem.",
       "assessment": {
         "title": "Smart Assessment",
         "description": "Understand your stress with questions that consider Kazakhstan's unique challenges"
@@ -60,31 +67,138 @@
         "title": "Local Resources",
         "description": "Connect with Kazakhstan-based mental health professionals"
       }
+    },
+    "testimonials": {
+      "title": "Trusted by People Across Kazakhstan",
+      "subtitle": "Real stories from real people who have transformed their relationship with stress",
+      "aigul": {
+        "content": "This platform helped me understand that stress management is not a luxury, but a necessity. The cultural sensitivity and local resources made all the difference."
+      },
+      "dmitry": {
+        "content": "As someone working in tech in Nur-Sultan, the quick daily tools fit perfectly into my schedule. I've seen real improvements in just 3 weeks."
+      },
+      "madina": {
+        "content": "Being a doctor, I understand the importance of mental health. This platform provides evidence-based tools that I now recommend to my patients."
+      }
+    },
+    "cta": {
+      "badge": "Made for Kazakhstan",
+      "title": "Ready to Build Mental Resilience?",
+      "description": "Join thousands of Kazakhstanis who are taking control of their stress and building stronger mental health.",
+      "primary_button": "Start Your Journey Today",
+      "secondary_button": "Contact Local Support"
+    },
+    "stats": {
+      "users": "2,500+",
+      "users_label": "Active Users",
+      "success_rate": "94%",
+      "success_label": "Report Improvement",
+      "cities": "17",
+      "cities_label": "Cities Covered",
+      "languages": "3",
+      "languages_label": "Languages Supported"
     }
   },
   "assessment": {
-    "title": "Stress Assessment",
-    "subtitle": "Help us understand your current situation",
+    "title": "Personal Stress Assessment for Kazakhstan",
+    "subtitle": "Help us understand your current situation to provide personalized recommendations",
     "progress": "Step {{current}} of {{total}}",
+    "level": "Level",
+    "complete": "Complete Assessment",
+    "levels": {
+      "very_low": "Very Low",
+      "moderate": "Moderate",
+      "very_high": "Very High"
+    },
     "questions": {
       "stress_level": "How would you rate your current stress level?",
+      "stress_level_description": "Be honest - this helps us provide better recommendations",
+      "demographics_title": "Tell us about yourself",
+      "demographics_description": "This helps us provide culturally relevant recommendations",
+      "age_range": "Age Range",
+      "location": "Your location in Kazakhstan",
+      "select_location": "Select your region",
+      "work_status": "Work Status",
       "stress_factors": "What are your main sources of stress?",
-      "work_pressure": "Work pressure",
-      "financial_concerns": "Financial concerns",
-      "family_responsibilities": "Family responsibilities",
-      "health_issues": "Health issues",
-      "social_relationships": "Social relationships",
-      "economic_uncertainty": "Economic uncertainty",
-      "urban_living": "Urban living challenges",
-      "rural_isolation": "Rural isolation",
-      "language_barriers": "Language barriers",
-      "cultural_adaptation": "Cultural adaptation"
+      "stress_factors_description": "Select all that apply - understanding the sources helps us help you",
+      "kazakhstan_stressors": "Kazakhstan-specific challenges",
+      "kazakhstan_stressors_description": "Are you experiencing any of these challenges specific to life in Kazakhstan?",
+      "review_title": "Review your responses",
+      "review_description": "Please review your answers before we generate your personalized recommendations"
+    },
+    "work_status": {
+      "employed_full_time": "Employed Full-time",
+      "employed_part_time": "Employed Part-time",
+      "self_employed": "Self-employed",
+      "unemployed": "Unemployed",
+      "student": "Student",
+      "retired": "Retired"
+    },
+    "kazakhstan_stressors": {
+      "economic-transition": "Economic transition challenges",
+      "urbanization-pressure": "Urbanization pressure",
+      "traditional-modern-balance": "Balancing traditional and modern values",
+      "language-policy-changes": "Language policy changes",
+      "employment-uncertainty": "Employment uncertainty",
+      "housing-costs": "Rising housing costs",
+      "healthcare-access": "Healthcare access issues",
+      "education-system": "Education system challenges",
+      "cultural-identity": "Cultural identity concerns",
+      "generational-differences": "Generational differences"
+    },
+    "factors_selected": "{{count}} factor{{count, plural, one {} other {s}}} selected",
+    "kz_stressors_selected": "{{count}} Kazakhstan-specific stressor{{count, plural, one {} other {s}}} selected",
+    "review": {
+      "stress_level": "Your Stress Level",
+      "demographics": "Demographics",
+      "stress_factors": "Main Stress Factors",
+      "kz_stressors": "Kazakhstan-specific Challenges"
+    },
+    "risk_levels": {
+      "low": "Low Risk - You're managing well",
+      "moderate": "Moderate Risk - Some areas need attention",
+      "high": "High Risk - Consider professional support",
+      "severe": "Severe Risk - Seek immediate help"
     },
     "results": {
-      "title": "Your Assessment Results",
-      "stress_level": "Current Stress Level: {{level}}/10",
-      "recommendations": "Personalized Recommendations",
-      "next_steps": "Recommended Next Steps"
+      "title": "Your Personalized Assessment Results",
+      "subtitle": "Based on your responses, here are your insights and recommendations",
+      "insights_title": "Key Insights",
+      "recommendations_title": "Personalized Recommendations",
+      "next_steps_title": "Your Next Steps",
+      "stress_level_insight": "Your stress level is {{level}}/10 ({{description}})",
+      "factors_insight": "You identified {{count}} main stress factor{{count, plural, one {} other {s}}}",
+      "cultural_factors_insight": "You're experiencing {{count}} Kazakhstan-specific stressor{{count, plural, one {} other {s}}}",
+      "location_insight": "Living in {{location}} brings unique opportunities and challenges",
+      "start_action": "Start Now",
+      "next_step_1": "Create a free account to track your progress",
+      "next_step_2": "Start with your highest priority recommendation",
+      "next_step_3": "Connect with local Kazakhstan mental health resources if needed",
+      "create_account": "Create Free Account",
+      "retake_assessment": "Retake Assessment"
+    },
+    "recommendations": {
+      "immediate_relief": {
+        "title": "Immediate Stress Relief",
+        "description": "Quick techniques to help you manage high stress levels right now"
+      },
+      "work_stress": {
+        "title": "Work Stress Management",
+        "description": "Strategies to better handle workplace pressure and maintain work-life balance"
+      },
+      "financial_wellness": {
+        "title": "Financial Stress Support",
+        "description": "Tools and resources to help manage financial anxiety and planning"
+      },
+      "cultural_balance": {
+        "title": "Cultural Balance Support",
+        "description": "Navigate the balance between traditional values and modern life in Kazakhstan"
+      }
+    },
+    "priority": {
+      "high": "High Priority",
+      "medium": "Medium Priority",
+      "low": "Low Priority"
     }
   },
   "dashboard": {
@@ -135,15 +249,19 @@
   "auth": {
     "login": {
       "title": "Welcome Back",
+      "subtitle": "Sign in to continue your stress management journey",
       "email": "Email",
       "password": "Password",
       "remember_me": "Remember me",
       "forgot_password": "Forgot password?",
       "no_account": "Don't have an account?",
-      "sign_up": "Sign up"
+      "sign_up": "Sign up",
+      "submit": "Sign In",
+      "signing_in": "Signing in..."
     },
     "register": {
       "title": "Create Your Account",
+      "subtitle": "Join thousands of people taking control of their stress",
       "first_name": "First Name",
       "last_name": "Last Name (optional)",
       "email": "Email",
@@ -153,7 +271,45 @@
       "location": "Location in Kazakhstan",
       "terms": "I agree to the Terms of Service and Privacy Policy",
       "have_account": "Already have an account?",
-      "sign_in": "Sign in"
+      "sign_in": "Sign in",
+      "submit": "Create Account",
+      "creating_account": "Creating account..."
+    },
+    "forgot_password": {
+      "title": "Reset Your Password",
+      "subtitle": "Enter your email address and we'll send you a reset link",
+      "email": "Email",
+      "submit": "Send Reset Link",
+      "sending": "Sending...",
+      "success": "Password reset link sent to your email",
+      "back_to_login": "Back to login"
+    },
+    "reset_password": {
+      "title": "Set New Password",
+      "subtitle": "Enter your new password below",
+      "password": "New Password",
+      "confirm_password": "Confirm New Password",
+      "submit": "Update Password",
+      "updating": "Updating...",
+      "success": "Password updated successfully"
+    },
+    "validation": {
+      "email_required": "Email is required",
+      "email_invalid": "Please enter a valid email address",
+      "password_required": "Password is required",
+      "password_min_length": "Password must be at least 8 characters",
+      "password_mismatch": "Passwords do not match",
+      "first_name_required": "First name is required",
+      "terms_required": "You must agree to the terms and privacy policy",
+      "location_required": "Please select your location"
+    },
+    "errors": {
+      "invalid_credentials": "Invalid email or password",
+      "email_already_exists": "An account with this email already exists",
+      "network_error": "Network error. Please try again.",
+      "server_error": "Server error. Please try again later.",
+      "token_expired": "Reset token has expired. Please request a new one.",
+      "token_invalid": "Invalid reset token"
     }
   },
   "profile": {

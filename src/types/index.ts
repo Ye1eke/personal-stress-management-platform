@@ -233,6 +233,70 @@ export interface PersonalizedInsight {
 }
 
 // ============================================================================
+// AUTHENTICATION TYPES
+// ============================================================================
+
+export interface AuthUser {
+  id: string;
+  email: string;
+  phone?: string;
+  firstName: string;
+  lastName?: string;
+  isEmailVerified: boolean;
+  isPhoneVerified: boolean;
+  createdAt: Date;
+  lastLoginAt: Date;
+}
+
+export interface LoginCredentials {
+  email: string;
+  password: string;
+  rememberMe?: boolean;
+}
+
+export interface RegisterData {
+  email: string;
+  phone?: string;
+  password: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName?: string;
+  location?: string;
+  language: Language;
+  agreeToTerms: boolean;
+  agreeToPrivacy: boolean;
+}
+
+export interface AuthTokens {
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: number;
+}
+
+export interface AuthResponse {
+  user: AuthUser;
+  tokens: AuthTokens;
+}
+
+export interface PasswordResetRequest {
+  email: string;
+}
+
+export interface PasswordResetConfirm {
+  token: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export interface AuthState {
+  user: AuthUser | null;
+  tokens: AuthTokens | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+}
+
+// ============================================================================
 // API RESPONSE TYPES
 // ============================================================================
 

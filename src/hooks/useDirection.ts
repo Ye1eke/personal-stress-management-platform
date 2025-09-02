@@ -5,12 +5,23 @@ import { useTranslation } from 'react-i18next';
 const RTL_LANGUAGES = ['ar', 'he', 'fa', 'ur'];
 
 export const useDirection = () => {
-  const { i18n } = useTranslation();
+  const { i18n, ready } = useTranslation();
+
+  // Only proceed if i18n is ready
+  if (!ready) {
+    return {
+      isRTL: false,
+      direction: 'ltr' as const,
+      language: 'en',
+    };
+  }
 
   const isRTL = RTL_LANGUAGES.includes(i18n.language);
   const direction = isRTL ? 'rtl' : 'ltr';
 
   useEffect(() => {
+    if (!ready) return;
+
     // Update document direction
     document.documentElement.dir = direction;
     document.documentElement.lang = i18n.language;
@@ -21,7 +32,7 @@ export const useDirection = () => {
     } else {
       document.body.classList.remove('rtl');
     }
-  }, [direction, isRTL, i18n.language]);
+  }, [direction, isRTL, i18n.language, ready]);
 
   return {
     isRTL,

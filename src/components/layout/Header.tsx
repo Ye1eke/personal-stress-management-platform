@@ -1,26 +1,33 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../ui';
 import { LanguageSwitcher } from '../ui/LanguageSwitcher';
+import { useAuth } from '../../contexts/AuthContext';
 import { cn } from '../../utils/cn';
 
 interface HeaderProps {
   className?: string;
-  isAuthenticated?: boolean;
-  onLogin?: () => void;
-  onLogout?: () => void;
-  onMenuToggle?: () => void;
-  showMobileMenu?: boolean;
 }
 
-export function Header({
-  className,
-  isAuthenticated = false,
-  onLogin,
-  onLogout,
-  onMenuToggle,
-  showMobileMenu = false,
-}: HeaderProps) {
+export function Header({ className }: HeaderProps) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { state, logout } = useAuth();
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  const handleLogin = () => {
+    navigate('/auth/login');
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
+  const handleMenuToggle = () => {
+    setShowMobileMenu(!showMobileMenu);
+  };
 
   return (
     <header
@@ -66,30 +73,40 @@ export function Header({
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <a
-              href="#home"
+            <Link
+              to="/"
               className="text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors"
             >
               {t('navigation.home')}
-            </a>
-            <a
-              href="#assessment"
-              className="text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors"
-            >
-              {t('navigation.assessment')}
-            </a>
-            <a
-              href="#exercises"
-              className="text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors"
-            >
-              {t('navigation.exercises')}
-            </a>
-            <a
-              href="#resources"
-              className="text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors"
-            >
-              {t('navigation.resources')}
-            </a>
+            </Link>
+            {state.isAuthenticated && (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                >
+                  {t('navigation.dashboard')}
+                </Link>
+                <a
+                  href="#assessment"
+                  className="text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                >
+                  {t('navigation.assessment')}
+                </a>
+                <a
+                  href="#exercises"
+                  className="text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                >
+                  {t('navigation.exercises')}
+                </a>
+                <a
+                  href="#resources"
+                  className="text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                >
+                  {t('navigation.resources')}
+                </a>
+              </>
+            )}
           </nav>
 
           {/* Right Side Actions */}
@@ -98,16 +115,12 @@ export function Header({
             <LanguageSwitcher variant="ghost" size="sm" />
 
             {/* Authentication Actions */}
-            {isAuthenticated ? (
+            {state.isAuthenticated ? (
               <div className="flex items-center space-x-3">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="hidden sm:inline-flex"
-                >
-                  {t('navigation.dashboard')}
-                </Button>
-                <Button variant="outline" size="sm" onClick={onLogout}>
+                <span className="hidden sm:inline-flex text-sm text-neutral-600">
+                  {state.user?.firstName}
+                </span>
+                <Button variant="outline" size="sm" onClick={handleLogout}>
                   {t('navigation.logout')}
                 </Button>
               </div>
@@ -116,12 +129,12 @@ export function Header({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={onLogin}
+                  onClick={handleLogin}
                   className="hidden sm:inline-flex"
                 >
                   {t('navigation.login')}
                 </Button>
-                <Button variant="primary" size="sm" onClick={onLogin}>
+                <Button variant="primary" size="sm" onClick={handleLogin}>
                   {t('homepage.hero.cta')}
                 </Button>
               </div>
@@ -129,7 +142,7 @@ export function Header({
 
             {/* Mobile Menu Button */}
             <button
-              onClick={onMenuToggle}
+              onClick={handleMenuToggle}
               className="md:hidden flex items-center justify-center h-10 w-10 rounded-md text-neutral-700 hover:bg-neutral-100 transition-colors"
               aria-label="Toggle mobile menu"
             >
@@ -168,38 +181,68 @@ export function Header({
         <div className="md:hidden border-t border-neutral-200 bg-white">
           <div className="container mx-auto max-w-container px-4 py-4">
             <nav className="flex flex-col space-y-4">
-              <a
-                href="#home"
+              <Link
+                to="/"
                 className="text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                onClick={() => setShowMobileMenu(false)}
               >
                 {t('navigation.home')}
-              </a>
-              <a
-                href="#assessment"
-                className="text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
-              >
-                {t('navigation.assessment')}
-              </a>
-              <a
-                href="#exercises"
-                className="text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
-              >
-                {t('navigation.exercises')}
-              </a>
-              <a
-                href="#resources"
-                className="text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
-              >
-                {t('navigation.resources')}
-              </a>
+              </Link>
 
-              {isAuthenticated && (
-                <a
-                  href="#dashboard"
-                  className="text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
-                >
-                  {t('navigation.dashboard')}
-                </a>
+              {state.isAuthenticated ? (
+                <>
+                  <Link
+                    to="/dashboard"
+                    className="text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    {t('navigation.dashboard')}
+                  </Link>
+                  <a
+                    href="#assessment"
+                    className="text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                  >
+                    {t('navigation.assessment')}
+                  </a>
+                  <a
+                    href="#exercises"
+                    className="text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                  >
+                    {t('navigation.exercises')}
+                  </a>
+                  <a
+                    href="#resources"
+                    className="text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                  >
+                    {t('navigation.resources')}
+                  </a>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setShowMobileMenu(false);
+                    }}
+                    className="text-left text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                  >
+                    {t('navigation.logout')}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/auth/login"
+                    className="text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    {t('navigation.login')}
+                  </Link>
+                  <Link
+                    to="/auth/register"
+                    className="text-base font-medium text-neutral-700 hover:text-primary-600 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    {t('navigation.register')}
+                  </Link>
+                </>
               )}
             </nav>
           </div>
